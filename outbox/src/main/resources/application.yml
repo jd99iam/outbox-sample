@@ -1,0 +1,24 @@
+spring:
+  # 1. Database ?? ??
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/outbox_order?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: '0000' # ???? ? ????? ???? ??? ?? ?????.
+
+  # 2. JPA ??
+  jpa:
+    hibernate:
+      ddl-auto: update # ??? ?? ?? (?? ???? ??)
+    show-sql: true     # ???? SQL ?? ??
+    properties:
+      hibernate:
+        format_sql: true
+
+  # 3. Kafka ??
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # JsonSerializer ?? StringSerializer? ?????!
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer

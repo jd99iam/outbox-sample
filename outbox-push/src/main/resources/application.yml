@@ -1,0 +1,29 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: push-service
+
+  # 1. Database ?? ??
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/outbox_push?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: '0000'
+
+  # 2. JPA ??
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  # 3. Kafka Consumer ??
+kafka:
+  consumer:
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    # ? JsonDeserializer?? StringDeserializer? ??
+    value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
